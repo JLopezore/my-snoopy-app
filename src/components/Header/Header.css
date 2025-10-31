@@ -18,13 +18,18 @@
     color: white;
 }
 
-
+.divider {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+}
 
 .logo-nav {
   display: flex;
   align-items: center;
-  gap: 300px;
-  position: relative;
+
+  justify-content: center;
 }
 
 .logo-image {
@@ -48,7 +53,9 @@
 }
 
 nav {
+  flex-grow: 1; /* Permite que nav ocupe el espacio disponible */
   display: flex;
+  justify-content: center; /* Centra los enlaces horizontalmente */
   gap: 25px;
   font-size: 25px;
 }
