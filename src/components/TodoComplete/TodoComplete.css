@@ -4,7 +4,7 @@
   max-width: 600px;
   background-color: #f0f4f8;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 4px rgba(27, 71, 194, 0.08);
 }
 
 .todo-complete-container h2 {
@@ -37,6 +37,13 @@
 
 .todo-complete-container li:hover {
   background-color: #f9f9f9;
+}
+
+.uncomplete-checkbox {
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  margin-right: 10px; /* Espacio entre el checkbox y el texto */
 }
 
 .todo-complete-container .task-text {
@@ -84,3 +91,6 @@
 
   color: #b30404;
 }
+
+
+
