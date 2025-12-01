@@ -1,34 +1,50 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom'; // Para tener 'matchers' de Jest
-import Header from './Header'; // El componente que queremos probar
+import React from "react";
+import { render, screen } from "@testing-library/react";
+import { BrowserRouter } from "react-router-dom";
+import Header from "./Header";
 
-// 1. Describe: Agrupa un conjunto de pruebas relacionadas
-describe('Componente Header', () => {
+describe("Header Component", () => {
+  test("renders the logo and title", () => {
+    render(
+      <BrowserRouter>
+        <Header />
+      </BrowserRouter>
+    );
 
-  // 2. Test (o 'it'): Es la prueba individual
-  test('debe renderizar el título de la aplicación', () => {
+    // Verificar que el logo y el título están presentes
+    const logoImage = screen.getByAltText("Logo");
+    const logoTitle = screen.getByText("Mi snoopy App");
 
-    // 3. Arrange (Organizar): Preparamos la prueba
-    render(<Header />);
-
-    // 4. Act (Actuar): (No es necesario en este test, 
-    //    sería para simular clics, etc.)
-
-    // 5. Assert (Afirmar): Comprobamos el resultado
-    const titulo = screen.getByText('Mi Aplicación Modular');
-
-    expect(titulo).toBeInTheDocument();
+    expect(logoImage).toBeInTheDocument();
+    expect(logoTitle).toBeInTheDocument();
   });
 
-  test('debe tener un rol de "banner"', () => {
-    // Probamos por accesibilidad y semántica
-    render(<Header />);
+  test("renders navigation links", () => {
+    render(
+      <BrowserRouter>
+        <Header />
+      </BrowserRouter>
+    );
 
-    // 'getByRole' es una mejor forma de buscar elementos
-    const headerElement = screen.getByRole('banner'); 
+    // Verificar que los enlaces de navegación están presentes
+    const linkInicio = screen.getByText("Inicio");
+    const linkTareas = screen.getByText("Tareas");
+    const linkDirectorio = screen.getByText("Directorio");
 
-    expect(headerElement).toBeInTheDocument();
+    expect(linkInicio).toBeInTheDocument();
+    expect(linkTareas).toBeInTheDocument();
+    expect(linkDirectorio).toBeInTheDocument();
   });
 
+  test("renders the ThemeSwitcher component", () => {
+    render(
+      <BrowserRouter>
+        <Header />
+      </BrowserRouter>
+    );
+
+    // Verificar que el componente ThemeSwitcher está presente
+    const themeSwitcher = screen.getByTestId("theme-switcher");
+    expect(themeSwitcher).toBeInTheDocument();
+  });
 });
