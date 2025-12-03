@@ -1,19 +1,29 @@
-import { renderHook, act } from "@testing-library/react-hooks";
-import { ThemeProvider } from "./ThemeContext";
-import React from "react";
-import ThemeContext from "./ThemeContext";
+import React, { useContext } from "react";
+import { render, screen, fireEvent } from "@testing-library/react";
+import ThemeContext, { ThemeProvider } from "./ThemeContext";
+
+const TestConsumer = () => {
+  const { theme, toggleTheme } = useContext(ThemeContext);
+  return (
+    <div>
+      <span data-testid="theme-value">{theme}</span>
+      <button onClick={toggleTheme}>toggle</button>
+    </div>
+  );
+};
 
 describe("ThemeContext", () => {
-  test("toggles theme", () => {
-    const wrapper = ({ children }) => <ThemeProvider>{children}</ThemeProvider>;
-    const { result } = renderHook(() => React.useContext(ThemeContext), { wrapper });
+  test("toggleTheme alterna entre light y dark", () => {
+    render(
+      <ThemeProvider>
+        <TestConsumer />
+      </ThemeProvider>
+    );
 
-    expect(result.current.theme).toBe("light");
+    const themeSpan = screen.getByTestId("theme-value");
+    expect(themeSpan.textContent).toBe("light");
 
-    act(() => {
-      result.current.toggleTheme();
-    });
-
-    expect(result.current.theme).toBe("dark");
+    fireEvent.click(screen.getByText("toggle"));
+    expect(themeSpan.textContent).toBe("dark");
   });
 });

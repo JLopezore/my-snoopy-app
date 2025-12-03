@@ -1,15 +1,12 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import { BrowserRouter } from "react-router-dom";
 import Header from "./Header";
+
+jest.mock("react-router-dom");
 
 describe("Header Component", () => {
   test("renders the logo and title", () => {
-    render(
-      <BrowserRouter>
-        <Header />
-      </BrowserRouter>
-    );
+    render(<Header />);
 
     // Verificar que el logo y el título están presentes
     const logoImage = screen.getByAltText("Logo");
@@ -20,11 +17,7 @@ describe("Header Component", () => {
   });
 
   test("renders navigation links", () => {
-    render(
-      <BrowserRouter>
-        <Header />
-      </BrowserRouter>
-    );
+    render(<Header />);
 
     // Verificar que los enlaces de navegación están presentes
     const linkInicio = screen.getByText("Inicio");
@@ -37,11 +30,7 @@ describe("Header Component", () => {
   });
 
   test("renders the ThemeSwitcher component", () => {
-    render(
-      <BrowserRouter>
-        <Header />
-      </BrowserRouter>
-    );
+    render(<Header />);
 
     // Verificar que el componente ThemeSwitcher está presente
     const themeSwitcher = screen.getByTestId("theme-switcher");
