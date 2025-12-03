@@ -15,7 +15,7 @@ const TodoItem = ({ task, onToggleComplete, onDeleteTask }) => {
       </div>
       <button
         className="delete-btn"
-        onClick={() => onDeleteTask(task.id)}
+        onClick={() => onDeleteTask(task)}
       >
         <IconTrash />
       </button>
